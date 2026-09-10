@@ -17,6 +17,9 @@
     "npm:pi-agent-browser-native"
   ],
   "observational-memory": {
+    "compactAfterTokens": 81000,
+    "compactAfterTokensMode": "ratio",
+    "compactAfterTokensRatio": 0.68,
     "models": {
       "observer": {
         "provider": "openai-codex",
