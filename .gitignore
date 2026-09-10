@@ -1,0 +1,45 @@
+# Credentials and machine-local trust
+/auth.json
+/trust.json
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Pi runtime and session state
+/sessions/
+/run-history.jsonl
+/.pi-subagents/
+**/.pi-subagents/
+/web-search-cache/
+/models-store.json
+
+# Pi-managed package and checkout caches
+/npm/
+/git/
+/local/
+
+# External skill checkout and generated workspaces
+/skills/last30days/
+/skills-disabled/planf3-workspace/
+
+# Dependencies, virtual environments, and generated output
+node_modules/
+.venv/
+__pycache__/
+*.py[cod]
+.cache/
+coverage/
+dist/
+build/
+
+# Logs, temporary files, and editor/OS metadata
+*.log
+*.tmp
+*.swp
+*.swo
+*~
+.DS_Store
+.idea/
+.vscode/

@@ -1,0 +1,305 @@
+diff --git a/README.md b/README.md
+index ae295ff..2571833 100644
+--- a/README.md
++++ b/README.md
+@@ -6,7 +6,7 @@ Async subagents for [pi](https://github.com/badlogic/pi-mono), running in Herdr
+ 
+ ## How it works
+ 
+-`subagent()` returns immediately. The sub-agent runs in its own Herdr pane, a right split off the parent pi pane that does not steal keyboard focus. A live widget above the input tracks every running sub-agent, and when one finishes, its result is steered into the main session as a notification that triggers a new turn.
++`subagent()` returns immediately. The sub-agent runs in its own Herdr pane without stealing keyboard focus. The first three agent panes form columns to the right of the parent Pi pane; additional agents are distributed vertically across those columns. A live widget above the input tracks every running sub-agent, and when one finishes, its result is steered into the main session as a notification that triggers a new turn.
+ 
+ ```
+ ╭─ Subagents ──────────────────────────── 2 running ─╮
+@@ -17,7 +17,7 @@ Async subagents for [pi](https://github.com/badlogic/pi-mono), running in Herdr
+ 
+ Spawn several in parallel — they run concurrently and steer results back independently as each finishes.
+ 
+-Herdr owns pane layout and focus. The extension submits commands atomically through Herdr and reads the pane's detected terminal output. Right-hand subagent panes are rebalanced into equal columns after each spawn or cleanup. If the terminal is too narrow for equal columns, the main Pi pane keeps the larger share and the remaining space is divided between subagents. Set `PI_SUBAGENT_MIN_PANE_WIDTH` to change the width threshold; it defaults to `24` columns.
++Herdr owns pane layout and focus. The extension submits commands atomically through Herdr and reads the pane's detected terminal output. Up to three right-hand agent columns are rebalanced after each spawn or cleanup. Additional agents split downward from the shortest column. If the terminal is too narrow for equal columns, the main Pi pane keeps the larger share and the remaining space is divided between agent columns. Set `PI_SUBAGENT_MIN_PANE_WIDTH` to change the width threshold; it defaults to `24` columns.
+ 
+ ## Tools
+ 
+diff --git a/pi-extension/subagents/herdr.ts b/pi-extension/subagents/herdr.ts
+index 66b9349..2ade743 100644
+--- a/pi-extension/subagents/herdr.ts
++++ b/pi-extension/subagents/herdr.ts
+@@ -72,24 +72,56 @@ export function shellEscape(s: string): string {
+ interface PaneLayout {
+   area: { width: number };
+   panes: Array<{ pane_id: string; rect: { width: number } }>;
+-  splits: Array<{ ratio: number }>;
++  splits: Array<{ direction: "right" | "down"; ratio: number }>;
++}
++
++interface SurfacePlacement {
++  direction: "right" | "down";
++  source: string;
++  columnIndex: number;
+ }
+ 
+ /**
+  * Herdr's default split behavior creates a nested right-hand tree. Repeatedly
+  * splitting the parent therefore makes the panes shrink geometrically. Keep
+- * the panes created by this extension on a left spine and rebalance its split
+- * ratios after every create/close so the columns stay equal when there is
+- * enough room. If equal columns would be too narrow, give the parent pane a
+- * larger share and divide the remaining space between the subagents.
++ * at most three agent columns beside the parent and rebalance their horizontal
++ * split ratios. Additional agents are distributed vertically across the
++ * shortest columns.
+  */
+ const MIN_BALANCED_PANE_WIDTH = Math.max(
+   1,
+   Number(process.env.PI_SUBAGENT_MIN_PANE_WIDTH ?? "24"),
+ );
++const MAX_HORIZONTAL_AGENT_COLUMNS = 3;
+ const MAX_RESIZE_STEP = 0.05;
+ let balancedParent: string | null = null;
+-const balancedSurfaces: string[] = [];
++const balancedColumns: string[][] = [];
++
++function chooseSurfacePlacement(
++  parent: string,
++  columns: readonly (readonly string[])[],
++): SurfacePlacement {
++  if (columns.length < MAX_HORIZONTAL_AGENT_COLUMNS) {
++    return { direction: "right", source: parent, columnIndex: columns.length };
++  }
++
++  let columnIndex = 0;
++  for (let index = 1; index < columns.length; index++) {
++    if (columns[index]!.length < columns[columnIndex]!.length) columnIndex = index;
++  }
++
++  const column = columns[columnIndex]!;
++  return {
++    direction: "down",
++    source: column[column.length - 1]!,
++    columnIndex,
++  };
++}
++
++export const __surfaceLayoutTest__ = {
++  chooseSurfacePlacement,
++  maxHorizontalAgentColumns: MAX_HORIZONTAL_AGENT_COLUMNS,
++};
+ 
+ function readPaneLayout(surface: string): PaneLayout | null {
+   try {
+@@ -132,37 +164,40 @@ function resizeSplit(
+ }
+ 
+ function rebalanceSurfaces(): void {
+-  if (!balancedParent || balancedSurfaces.length === 0) return;
++  if (!balancedParent || balancedColumns.length === 0) return;
+ 
+-  const totalPanes = balancedSurfaces.length + 1;
++  const balancedSurfaces = balancedColumns.map((column) => column[0]!);
++  const totalColumns = balancedSurfaces.length + 1;
+   let layout = readPaneLayout(balancedParent);
+-  if (!layout || layout.splits.length < totalPanes - 1) return;
++  let horizontalSplits = layout?.splits.filter((split) => split.direction === "right") ?? [];
++  if (!layout || horizontalSplits.length < totalColumns - 1) return;
+ 
+   const width = layout.area.width;
+-  const equalColumns = width >= totalPanes * MIN_BALANCED_PANE_WIDTH;
+-  const parentShare = equalColumns || totalPanes === 2 ? 1 / totalPanes : 0.4;
++  const equalColumns = width >= totalColumns * MIN_BALANCED_PANE_WIDTH;
++  const parentShare = equalColumns || totalColumns === 2 ? 1 / totalColumns : 0.4;
+   const agentShare = (1 - parentShare) / balancedSurfaces.length;
+ 
+   // Herdr reports this left-spine layout from outermost to innermost. The
+-  // newest subagent is the outermost right-hand leaf; the parent is the
++  // oldest agent column is the outermost right-hand branch; the parent is the
+   // innermost left-hand leaf.
+-  for (let splitIndex = 0; splitIndex < totalPanes - 1; splitIndex++) {
++  for (let splitIndex = 0; splitIndex < totalColumns - 1; splitIndex++) {
+     for (let attempt = 0; attempt < 20; attempt++) {
+       layout = readPaneLayout(balancedParent) ?? layout;
+-      const current = layout.splits[splitIndex]?.ratio;
++      horizontalSplits = layout.splits.filter((split) => split.direction === "right");
++      const current = horizontalSplits[splitIndex]?.ratio;
+       if (typeof current !== "number") break;
+ 
+-      const firstLeafCount = totalPanes - 1 - splitIndex;
++      const firstLeafCount = totalColumns - 1 - splitIndex;
+       const firstBranchShare = equalColumns
+-        ? firstLeafCount / totalPanes
++        ? firstLeafCount / totalColumns
+         : parentShare + (firstLeafCount - 1) * agentShare;
+-      const secondBranchShare = equalColumns ? 1 / totalPanes : agentShare;
++      const secondBranchShare = equalColumns ? 1 / totalColumns : agentShare;
+       const target = firstBranchShare / (firstBranchShare + secondBranchShare);
+       const delta = target - current;
+       if (Math.abs(delta) <= 0.01) break;
+ 
+       const firstBranchRightmost =
+-        splitIndex === totalPanes - 2
++        splitIndex === totalColumns - 2
+           ? balancedParent
+           : balancedSurfaces[splitIndex + 1];
+       const secondBranchLeaf = balancedSurfaces[splitIndex];
+@@ -174,27 +209,41 @@ function rebalanceSurfaces(): void {
+   }
+ }
+ 
+-function trackBalancedSurface(parent: string, surface: string): void {
+-  if (balancedParent !== parent) {
+-    balancedParent = parent;
+-    balancedSurfaces.length = 0;
+-  }
+-  if (!balancedSurfaces.includes(surface)) balancedSurfaces.push(surface);
+-  rebalanceSurfaces();
++function syncBalancedParent(parent: string): void {
++  if (balancedParent === parent) return;
++  balancedParent = parent;
++  balancedColumns.length = 0;
+ }
+ 
+ function untrackBalancedSurface(surface: string): boolean {
+-  const index = balancedSurfaces.indexOf(surface);
+-  if (index < 0) return false;
+-  balancedSurfaces.splice(index, 1);
+-  return true;
++  for (let columnIndex = 0; columnIndex < balancedColumns.length; columnIndex++) {
++    const column = balancedColumns[columnIndex]!;
++    const surfaceIndex = column.indexOf(surface);
++    if (surfaceIndex < 0) continue;
++
++    column.splice(surfaceIndex, 1);
++    if (column.length === 0) balancedColumns.splice(columnIndex, 1);
++    return true;
++  }
++  return false;
+ }
+ 
+ // ── Surface primitives ──
+ 
+-/** Create a right, non-focused pane off the parent pi pane. */
++/** Create a non-focused pane in the next available agent-column slot. */
+ export function createSurface(name: string): string {
+-  return createSurfaceSplit(name, "right", process.env.HERDR_PANE_ID);
++  const parent = process.env.HERDR_PANE_ID;
++  if (!parent) throw new Error("HERDR_PANE_ID is not set.");
++
++  syncBalancedParent(parent);
++  const placement = chooseSurfacePlacement(parent, balancedColumns);
++  const pane = createSurfaceSplit(name, placement.direction, placement.source);
++
++  if (placement.direction === "down") {
++    balancedColumns[placement.columnIndex]!.push(pane);
++  }
++
++  return pane;
+ }
+ 
+ /** Create a Herdr split in the given direction. */
+@@ -216,10 +265,10 @@ export function createSurfaceSplit(
+   const pane = response.result?.pane?.pane_id;
+   if (!pane) throw new Error("Herdr pane split returned no pane id.");
+ 
+-  // Only the normal subagent path participates. Tests and callers that create
+-  // an arbitrary split from another surface retain Herdr's requested layout.
+   if (direction === "right" && source === process.env.HERDR_PANE_ID) {
+-    trackBalancedSurface(source, pane);
++    syncBalancedParent(source);
++    balancedColumns.push([pane]);
++    rebalanceSurfaces();
+   }
+ 
+   return pane;
+diff --git a/test/integration/surface.test.ts b/test/integration/surface.test.ts
+index 45820ba..979bcd6 100644
+--- a/test/integration/surface.test.ts
++++ b/test/integration/surface.test.ts
+@@ -111,6 +111,28 @@ for (const backend of backends) {
+       );
+     });
+ 
++    it("stacks agents vertically after three horizontal agent columns", () => {
++      const parent = getFocusedSurface();
++      assert.ok(parent, "The test runner should have a focused Herdr pane");
++      const surfaces = Array.from({ length: 4 }, (_, index) =>
++        createTrackedSurface(env, `placement-${index + 1}`),
++      );
++
++      const response = JSON.parse(
++        execFileSync("herdr", ["pane", "layout", "--pane", parent], { encoding: "utf8" }),
++      );
++      const panes = response.result.layout.panes;
++      const rects = surfaces.map((pane) => {
++        const rect = panes.find((entry: any) => entry.pane_id === pane)?.rect;
++        assert.ok(rect, `Expected layout rect for ${pane}`);
++        return rect;
++      });
++
++      assert.equal(new Set(rects.slice(0, 3).map((rect) => rect.x)).size, 3);
++      assert.equal(rects[3].x, rects[0].x);
++      assert.notEqual(rects[3].y, rects[0].y);
++    });
++
+     it("creates a surface, sends a command, reads output, and closes it", async () => {
+       const surface = createTrackedSurface(env, "echo-test");
+       await sleep(1000);
+diff --git a/test/test.ts b/test/test.ts
+index 3ed55b4..8090e26 100644
+--- a/test/test.ts
++++ b/test/test.ts
+@@ -30,7 +30,11 @@ import {
+   summarizeSessionStats,
+ } from "../pi-extension/subagents/session.ts";
+ 
+-import { shellEscape } from "../pi-extension/subagents/herdr.ts";
++import {
++  shellEscape,
++  __pollForExitTest__,
++  __surfaceLayoutTest__,
++} from "../pi-extension/subagents/herdr.ts";
+ import {
+   advanceStatusState,
+   capStatusLines,
+@@ -56,7 +60,6 @@ import {
+   runningChildrenCount,
+ } from "../pi-extension/subagents/subagent-done.ts";
+ import subagentDoneExtension from "../pi-extension/subagents/subagent-done.ts";
+-import { __pollForExitTest__ } from "../pi-extension/subagents/herdr.ts";
+ 
+ // --- Helpers ---
+ 
+@@ -2763,6 +2766,35 @@ describe("subagent display helpers", () => {
+ });
+ 
+ describe("herdr.ts", () => {
++  describe("surface placement", () => {
++    it("uses three agent columns, then fills the shortest columns vertically", () => {
++      const { chooseSurfacePlacement, maxHorizontalAgentColumns } = __surfaceLayoutTest__;
++      const columns: string[][] = [];
++
++      for (let index = 0; index < maxHorizontalAgentColumns; index++) {
++        assert.deepEqual(chooseSurfacePlacement("main", columns), {
++          direction: "right",
++          source: "main",
++          columnIndex: index,
++        });
++        columns.push([`agent-${index + 1}`]);
++      }
++
++      assert.deepEqual(chooseSurfacePlacement("main", columns), {
++        direction: "down",
++        source: "agent-1",
++        columnIndex: 0,
++      });
++      columns[0]!.push(`agent-${maxHorizontalAgentColumns + 1}`);
++
++      assert.deepEqual(chooseSurfacePlacement("main", columns), {
++        direction: "down",
++        source: "agent-2",
++        columnIndex: 1,
++      });
++    });
++  });
++
+   describe("shellEscape", () => {
+     it("wraps in single quotes", () => {
+       assert.equal(shellEscape("hello"), "'hello'");
