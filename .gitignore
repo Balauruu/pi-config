@@ -21,8 +21,8 @@
 /local/
 
 # External skill checkout and generated workspaces
-/skills/last30days/
-/skills-disabled/planf3-workspace/
+/skills/
+/skills-disabled/
 
 # Dependencies, virtual environments, and generated output
 node_modules/
