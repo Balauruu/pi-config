@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "previousPackage": "git:github.com/Balauruu/pi-interactive-subagents-herdr@110cee4938f0272bdf19889b4d5eab40aea80c08",
-  "candidatePackage": "git:github.com/Balauruu/pi-interactive-subagents-herdr@f12b172fe2c4fe7be9381de53c572e9220bc32b9",
-  "candidateCommit": "f12b172fe2c4fe7be9381de53c572e9220bc32b9",
+  "previousPackage": "git:github.com/Balauruu/pi-interactive-subagents-herdr@2d478f83d05f29cbbb0c9deb9ba5c22aca2fa6f4",
+  "candidatePackage": "git:github.com/Balauruu/pi-interactive-subagents-herdr@110cee4938f0272bdf19889b4d5eab40aea80c08",
+  "candidateCommit": "110cee4938f0272bdf19889b4d5eab40aea80c08",
   "candidateRemote": "github.com/Balauruu/pi-interactive-subagents-herdr"
 }
