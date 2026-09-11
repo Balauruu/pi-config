@@ -10,7 +10,7 @@
     "npm:@juicesharp/rpiv-ask-user-question",
     "../../../../data/AI/PI/@HARNESS-BUILD/packages/better-autocomplete",
     "npm:pi-zentui",
-    "git:github.com/Balauruu/pi-interactive-subagents-herdr@110cee4938f0272bdf19889b4d5eab40aea80c08",
+    "git:github.com/Balauruu/pi-interactive-subagents-herdr@e7c9da584b8e858bf77ecb65a4f7fc3c304f58f0",
     "npm:pi-observational-memory",
     "npm:context-mode",
     "npm:pi-mcp-adapter",
