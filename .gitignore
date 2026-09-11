@@ -17,7 +17,13 @@
 
 # Pi-managed package and checkout caches
 /npm/
-/git/
+/git/*
+!/git/.gitignore
+!/git/github.com/
+/git/github.com/*
+!/git/github.com/Balauruu/
+/git/github.com/Balauruu/*
+!/git/github.com/Balauruu/pi-interactive-subagents-herdr/
 /local/
 
 # External skill checkout and generated workspaces

@@ -1,0 +1,3 @@
+[submodule "herdr"]
+	path = git/github.com/Balauruu/pi-interactive-subagents-herdr
+	url = https://github.com/Balauruu/pi-interactive-subagents-herdr

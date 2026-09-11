@@ -1,0 +1,8 @@
+*
+!.gitignore
+!github.com/
+github.com/*
+!github.com/Balauruu/
+github.com/Balauruu/*
+!github.com/Balauruu/pi-interactive-subagents-herdr/
+!github.com/Balauruu/pi-interactive-subagents-herdr/**

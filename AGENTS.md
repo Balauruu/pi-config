@@ -11,6 +11,13 @@
 - Preserve user-authored and uncommitted changes. Do not discard or overwrite them unless explicitly requested.
 - For time-sensitive or external claims, verify with available web tools, prefer primary sources, and cite links.
 
+## Managed Repositories
+
+- Herdr is the Git submodule at `git/github.com/Balauruu/pi-interactive-subagents-herdr`, with its own history and `origin` remote.
+- Follow `HERDR.md` for clone, setup, update, deployment-pin, and verification procedures.
+- Run Herdr Git, package, and test commands from the Herdr repository root.
+- In GSD, target repository ID `herdr`. Keep task files and verification commands repository-relative. Do not use parent-relative Herdr paths or `npm --prefix` in a Herdr task contract.
+
 ### 1. Privacy and Security Scope
 
 Treat my work as personal and non-shared unless I state otherwise. Optimize for requested functionality, correctness, and simplicity, not hypothetical privacy or security requirements.
