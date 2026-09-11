@@ -71,3 +71,4 @@ venv/
 target/
 vendor/
 tmp/
+.gsd-graph/
