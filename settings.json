@@ -1,8 +1,8 @@
 {
-  "lastChangelogVersion": "0.85.1",
+  "lastChangelogVersion": "0.87.1",
   "theme": "dark",
   "defaultProvider": "openai-codex",
-  "defaultModel": "gpt-5.6-sol",
+  "defaultModel": "gpt-6-sol",
   "defaultThinkingLevel": "high",
   "hideThinkingBlock": false,
   "packages": [
@@ -10,7 +10,6 @@
     "npm:@juicesharp/rpiv-ask-user-question",
     "../../../../data/AI/PI/@HARNESS-BUILD/packages/better-autocomplete",
     "npm:pi-zentui",
-    "git:github.com/Balauruu/pi-interactive-subagents-herdr@cb8b76108bab03597cd7a617b5d232cbd1c1ae17",
     "npm:pi-observational-memory",
     "npm:context-mode",
     "npm:pi-mcp-adapter",
@@ -18,11 +17,13 @@
     "npm:pi-condense",
     "npm:@pi-archimedes/session-name",
     "npm:pi-tool-repair",
-    "npm:@agwab/pi-workflow"
+    "npm:@agwab/pi-workflow",
+    "npm:pi-subagents",
+    "npm:pi-intercom"
   ],
   "contextPrune": {
     "enabled": true,
-    "summarizerModel": "openai-codex/gpt-5.6-luna",
+    "summarizerModel": "openai-codex/gpt-6-luna",
     "summarizerThinking": "high",
     "protectedTools": [
       "ask_user_question"
@@ -43,13 +44,120 @@
     "models": {
       "observer": {
         "provider": "openai-codex",
-        "id": "gpt-5.6-luna",
+        "id": "gpt-6-luna",
         "thinking": "xhigh"
       },
       "consolidator": {
         "provider": "openai-codex",
-        "id": "gpt-5.6-luna",
+        "id": "gpt-6-luna",
         "thinking": "max"
+      }
+    }
+  },
+  "subagents": {
+    "agentOverrides": {
+      "artifact-code-reviewer": {
+        "model": "openai-codex/gpt-6-sol",
+        "thinking": "high"
+      },
+      "artifact-coverage-reviewer": {
+        "model": "openai-codex/gpt-6-sol",
+        "thinking": "medium"
+      },
+      "artifacts-analyzer": {
+        "model": "openai-codex/gpt-6-sol",
+        "thinking": "xhigh"
+      },
+      "artifacts-locator": {
+        "model": "openai-codex/gpt-6-luna",
+        "thinking": "medium"
+      },
+      "claim-verifier": {
+        "model": "openai-codex/gpt-6-sol",
+        "thinking": "high"
+      },
+      "codebase-analyzer": {
+        "model": "openai-codex/gpt-6-sol",
+        "thinking": "xhigh"
+      },
+      "codebase-locator": {
+        "model": "openai-codex/gpt-6-luna",
+        "thinking": "medium"
+      },
+      "codebase-pattern-finder": {
+        "model": "openai-codex/gpt-6-sol",
+        "thinking": "high"
+      },
+      "diff-auditor": {
+        "model": "openai-codex/gpt-6-luna",
+        "thinking": "xhigh"
+      },
+      "integration-scanner": {
+        "model": "openai-codex/gpt-6-luna",
+        "thinking": "high"
+      },
+      "peer-comparator": {
+        "model": "openai-codex/gpt-6-luna",
+        "thinking": "max"
+      },
+      "precedent-locator": {
+        "model": "openai-codex/gpt-6-luna",
+        "thinking": "max"
+      },
+      "scope-tracer": {
+        "model": "openai-codex/gpt-6-sol",
+        "thinking": "xhigh"
+      },
+      "doc-writer": {
+        "model": "openai-codex/gpt-6-luna",
+        "thinking": "max"
+      },
+      "git-ops": {
+        "model": "openai-codex/gpt-6-sol",
+        "thinking": "high"
+      },
+      "javascript-pro": {
+        "model": "openai-codex/gpt-6-luna",
+        "thinking": "max"
+      },
+      "oracle": {
+        "model": "openai-codex/gpt-6-astra",
+        "thinking": "medium"
+      },
+      "planner": {
+        "model": "openai-codex/gpt-6-astra",
+        "thinking": "medium"
+      },
+      "researcher": {
+        "model": "openai-codex/gpt-6-luna",
+        "thinking": "max"
+      },
+      "reviewer": {
+        "model": "openai-codex/gpt-6-sol",
+        "thinking": "xhigh"
+      },
+      "scout": {
+        "model": "openai-codex/gpt-6-luna",
+        "thinking": "max"
+      },
+      "tester": {
+        "model": "openai-codex/gpt-6-sol",
+        "thinking": "xhigh"
+      },
+      "typescript-pro": {
+        "model": "openai-codex/gpt-6-luna",
+        "thinking": "max"
+      },
+      "worker": {
+        "model": "openai-codex/gpt-6-luna",
+        "thinking": "max"
+      },
+      "delegate": {
+        "model": "openai-codex/gpt-6-luna",
+        "thinking": "max"
+      },
+      "evidence-auditor": {
+        "model": "openai-codex/gpt-6-sol"
       }
     }
   }

@@ -14,6 +14,8 @@
 **/.pi-subagents/
 /web-search-cache/
 /models-store.json
+/missions/
+/intercom/
 
 # Pi-managed package and checkout caches
 /npm/
@@ -77,4 +79,3 @@ venv/
 target/
 vendor/
 tmp/
-.gsd-graph/
