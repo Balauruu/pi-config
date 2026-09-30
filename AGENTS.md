@@ -87,3 +87,20 @@ Create suitable prefixes for other categories. Preserve codes throughout the con
 
 </important>
 
+<important if="you are answering codebase questions or exploring project structure">
+
+When the current project has a Graphify knowledge graph at `graphify-out/`:
+- For codebase questions, first run `graphify query "<question>"` if `graphify-out/graph.json` exists.
+- Use `graphify path "<A>" "<B>"` for relationships and `graphify explain "<concept>"` for focused concepts.
+- If `graphify-out/wiki/index.md` exists, use it for broad navigation.
+- Read `graphify-out/GRAPH_REPORT.md` only for broad architecture review or when `query`, `path`, or `explain` do not provide enough context.
+- Dirty graph files are not by themselves a reason to skip Graphify. Skip it only when the task concerns stale or incorrect graph output, or the user explicitly says not to use it.
+
+</important>
+
+<important if="you are modifying code in a Graphify-indexed project">
+
+After modifying code, run `graphify update .` to keep the graph current.
+
+</important>
+
