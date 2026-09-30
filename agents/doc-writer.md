@@ -1,7 +1,7 @@
 ---
 name: doc-writer
 description: Documentation generation from code — API docs, inline comments, READMEs
-tools: read, write, edit, grep, find, ls, safe_bash, contact_supervisor
+tools: read, write, edit, grep, find, ls, contact_supervisor
 system-prompt: replace
 auto-exit: true
 ---

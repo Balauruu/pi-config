@@ -1,9 +1,13 @@
 {
-  "lastChangelogVersion": "0.87.1",
-  "theme": "dark",
+  "lastChangelogVersion": "0.99.1",
+  "defaultTools": [
+    "+codemode",
+    "+tool_search"
+  ],
+  "theme": "system",
   "defaultProvider": "openai-codex",
-  "defaultModel": "gpt-6-sol",
-  "defaultThinkingLevel": "high",
+  "defaultModel": "gpt-6.1-sol",
+  "defaultThinkingLevel": "medium",
   "hideThinkingBlock": false,
   "packages": [
     "npm:pi-web-access",
@@ -12,7 +16,6 @@
     "npm:pi-zentui",
     "npm:pi-observational-memory",
     "npm:context-mode",
-    "npm:pi-mcp-adapter",
     "npm:pi-agent-browser-native",
     "npm:pi-condense",
     "npm:@pi-archimedes/session-name",
@@ -24,7 +27,7 @@
   "contextPrune": {
     "enabled": true,
     "summarizerModel": "openai-codex/gpt-6-luna",
-    "summarizerThinking": "high",
+    "summarizerThinking": "xhigh",
     "protectedTools": [
       "ask_user_question"
     ],
@@ -38,9 +41,9 @@
     ]
   },
   "observational-memory": {
-    "compactAfterTokens": 81000,
+    "compactAfterTokens": 260000,
     "compactAfterTokensMode": "ratio",
-    "compactAfterTokensRatio": 0.68,
+    "compactAfterTokensRatio": 0.92,
     "models": {
       "observer": {
         "provider": "openai-codex",
@@ -55,37 +58,45 @@
     }
   },
   "subagents": {
+    "modelScope": {
+      "enforce": true,
+      "strict": true,
+      "allow": [
+        "openai-codex/gpt-6.1-sol",
+        "openai-codex/gpt-6-luna"
+      ]
+    },
     "agentOverrides": {
       "artifact-code-reviewer": {
-        "model": "openai-codex/gpt-6-sol",
+        "model": "openai-codex/gpt-6.1-sol",
         "thinking": "high"
       },
       "artifact-coverage-reviewer": {
-        "model": "openai-codex/gpt-6-sol",
-        "thinking": "medium"
+        "model": "openai-codex/gpt-6.1-sol",
+        "thinking": "high"
       },
       "artifacts-analyzer": {
-        "model": "openai-codex/gpt-6-sol",
-        "thinking": "xhigh"
+        "model": "openai-codex/gpt-6.1-sol",
+        "thinking": "high"
       },
       "artifacts-locator": {
         "model": "openai-codex/gpt-6-luna",
-        "thinking": "medium"
+        "thinking": "xhigh"
       },
       "claim-verifier": {
-        "model": "openai-codex/gpt-6-sol",
+        "model": "openai-codex/gpt-6.1-sol",
         "thinking": "high"
       },
       "codebase-analyzer": {
-        "model": "openai-codex/gpt-6-sol",
-        "thinking": "xhigh"
+        "model": "openai-codex/gpt-6.1-sol",
+        "thinking": "high"
       },
       "codebase-locator": {
         "model": "openai-codex/gpt-6-luna",
-        "thinking": "medium"
+        "thinking": "xhigh"
       },
       "codebase-pattern-finder": {
-        "model": "openai-codex/gpt-6-sol",
+        "model": "openai-codex/gpt-6.1-sol",
         "thinking": "high"
       },
       "diff-auditor": {
@@ -94,7 +105,7 @@
       },
       "integration-scanner": {
         "model": "openai-codex/gpt-6-luna",
-        "thinking": "high"
+        "thinking": "xhigh"
       },
       "peer-comparator": {
         "model": "openai-codex/gpt-6-luna",
@@ -105,60 +116,66 @@
         "thinking": "max"
       },
       "scope-tracer": {
-        "model": "openai-codex/gpt-6-sol",
-        "thinking": "xhigh"
+        "model": "openai-codex/gpt-6.1-sol",
+        "thinking": "high"
       },
       "doc-writer": {
-        "model": "openai-codex/gpt-6-luna",
-        "thinking": "max"
+        "model": "openai-codex/gpt-6.1-sol",
+        "thinking": "high"
       },
       "git-ops": {
-        "model": "openai-codex/gpt-6-sol",
+        "model": "openai-codex/gpt-6.1-sol",
         "thinking": "high"
       },
       "javascript-pro": {
-        "model": "openai-codex/gpt-6-luna",
-        "thinking": "max"
+        "model": "openai-codex/gpt-6.1-sol",
+        "thinking": "high"
       },
       "oracle": {
-        "model": "openai-codex/gpt-6-astra",
-        "thinking": "medium"
+        "model": "openai-codex/gpt-6.1-sol",
+        "thinking": "high"
       },
       "planner": {
-        "model": "openai-codex/gpt-6-astra",
-        "thinking": "medium"
-      },
-      "researcher": {
-        "model": "openai-codex/gpt-6-luna",
+        "model": "openai-codex/gpt-6.1-sol",
         "thinking": "max"
       },
+      "researcher": {
+        "model": "openai-codex/gpt-6.1-sol",
+        "thinking": "medium"
+      },
       "reviewer": {
-        "model": "openai-codex/gpt-6-sol",
-        "thinking": "xhigh"
+        "model": "openai-codex/gpt-6.1-sol",
+        "thinking": "max"
       },
       "scout": {
         "model": "openai-codex/gpt-6-luna",
-        "thinking": "max"
-      },
-      "tester": {
-        "model": "openai-codex/gpt-6-sol",
         "thinking": "xhigh"
       },
-      "typescript-pro": {
-        "model": "openai-codex/gpt-6-luna",
+      "tester": {
+        "model": "openai-codex/gpt-6.1-sol",
         "thinking": "max"
+      },
+      "typescript-pro": {
+        "model": "openai-codex/gpt-6.1-sol",
+        "thinking": "high"
       },
       "worker": {
-        "model": "openai-codex/gpt-6-luna",
-        "thinking": "max"
+        "model": "openai-codex/gpt-6.1-sol",
+        "thinking": "high"
       },
       "delegate": {
-        "model": "openai-codex/gpt-6-luna",
-        "thinking": "max"
+        "model": "openai-codex/gpt-6.1-sol",
+        "thinking": "medium"
       },
       "evidence-auditor": {
-        "model": "openai-codex/gpt-6-sol"
+        "model": "openai-codex/gpt-6.1-sol",
+        "thinking": "max"
       }
     }
-  }
+  },
+  "enabledModels": [
+    "openai-codex/gpt-6.1-sol",
+    "openai-codex/gpt-6-luna"
+  ],
+  "deviceId": "0624fb2d-c9aa-4d95-9d78-2095e6c889e2"
 }

@@ -1,7 +1,7 @@
 ---
 name: planner
 description: Architecture and implementation planning — outputs plans, not code
-tools: read, write, edit, grep, find, ls, safe_bash.
+tools: read, write, edit, grep, find, ls
 system-prompt: append
 auto-exit: true
 ---

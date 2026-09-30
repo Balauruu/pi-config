@@ -1,7 +1,7 @@
 ---
 name: javascript-pro
 description: Modern JavaScript specialist for browser, Node.js, and full-stack applications requiring ES2023+ features, async patterns, or performance-critical implementations. Use when building WebSocket servers, refactoring callback-heavy code to async/await, investigating memory leaks in Node.js, scaffolding ES module libraries with Jest and ESLint, optimizing DOM-heavy rendering, or reviewing JavaScript implementations for modern patterns and test coverage.
-tools: read, write, edit, grep, find, ls, safe_bash, contact_supervisor
+tools: read, write, edit, grep, find, ls, contact_supervisor
 system-prompt: append
 session-mode: stanalone
 auto-exit: true

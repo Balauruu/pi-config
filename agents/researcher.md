@@ -1,7 +1,7 @@
 ---
 name: researcher
 description: Web researcher that searches the web and synthesizes findings
-tools: web_search, fetch_content, get_search_content, safe_bash, contact_supervisor
+tools: web_search, fetch_content, get_search_content, contact_supervisor
 systemPromptMode: replace
 inheritProjectContext: true
 inheritSkills: false

@@ -1,7 +1,7 @@
 ---
 name: tester
 description: Test writing, fixing, and coverage gap identification
-tools: read, write, edit, grep, find, ls, safe_bash, contact_supervisor
+tools: read, write, edit, grep, find, ls, contact_supervisor
 system-prompt: append
 session-mode: stanalone
 auto-exit: true

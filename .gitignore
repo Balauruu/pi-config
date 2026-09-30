@@ -16,6 +16,9 @@
 /models-store.json
 /missions/
 /intercom/
+/subagent-runs
+crashes.json
+
 
 # Pi-managed package and checkout caches
 /npm/
@@ -51,6 +54,7 @@ build/
 .DS_Store
 .idea/
 .vscode/
+.research/
 
 # ── GSD baseline (auto-generated) ──
 .gsd

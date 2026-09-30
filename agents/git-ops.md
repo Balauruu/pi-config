@@ -1,7 +1,7 @@
 ---
 name: git-ops
 description: Conflict resolution, rebase strategy, PR preparation, and changelog generation
-tools: read, edit, grep, find, ls, safe_bash, contact_supervisor
+tools: read, edit, grep, find, ls, contact_supervisor
 system-prompt: replace
 session-mode: lineage-only
 auto-exit: true
