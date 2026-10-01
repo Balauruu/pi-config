@@ -55,6 +55,9 @@ build/
 .idea/
 .vscode/
 .research/
+reports/
+tests/
+.rpiv/
 
 # ── GSD baseline (auto-generated) ──
 .gsd

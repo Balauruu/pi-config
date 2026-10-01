@@ -1,0 +1,17 @@
+{
+  "artifact-code-reviewer.md": "c1ae9e54fef9c72e21933cb2162346cff9bc6c52af55bf54ac74e30d101bfd23",
+  "artifact-coverage-reviewer.md": "7ada562ea07468f8ee0373fb69b40f2374057b766f8736c830aa793fb7b8c4a2",
+  "artifacts-analyzer.md": "fa7742dd1b43af1185cd6f03af62f9cdcf74a46e2860dd9285be3d63660bbc06",
+  "artifacts-locator.md": "ac25bbab36ca3dabe2279390b154d93c796ad5bdc6c05c260b4bbecb3448c208",
+  "claim-verifier.md": "2b05498936873b6aef91e2644a5bcb81b456e335fd57a8ea1a04706d4ec07d0f",
+  "codebase-analyzer.md": "df3c2b255cd0add02570b5d8a6b37aa920d9651c320bdc9c8cfa902c9117081c",
+  "codebase-locator.md": "2e9b1e9b2a63c24bd1be372890fe9163a11753db19831e75dec9e4900b81d4e1",
+  "codebase-pattern-finder.md": "4382cc41865a5420eab99b9ffe6bcdccec4721034cf7821075408e913391d754",
+  "diff-auditor.md": "ff5f679dfdbe266ed66baeb99e4b66b1f21deb9ef9245936974c13c89b45f6ab",
+  "integration-scanner.md": "41bf0170e21d2d8a018e0f6ea6a75d21140f524e502deaf34dac205d990c447e",
+  "peer-comparator.md": "353a1c060ff6812b2791907dcc3af15819fa0676857a56a0323397053e60ee60",
+  "precedent-locator.md": "5952484b1956a1a8b3159eadb9d3734c38427fd90cc5d0af3285201affc52f57",
+  "scope-tracer.md": "961307ede5e53283caf5752a303c7a0aab3fec94cbd88cef4472fbdd871b1f92",
+  "slice-verifier.md": "5b90b15d028f89ad42550f7d4c003f7ab9db31eeee231d0d399fef390506b473",
+  "web-search-researcher.md": "80f375a1d6791ed52d4fdb53324342088dfc86907196c8915055683618551ab9"
+}

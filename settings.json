@@ -1,5 +1,5 @@
 {
-  "lastChangelogVersion": "0.99.1",
+  "lastChangelogVersion": "0.99.2",
   "defaultTools": [
     "+codemode",
     "+tool_search"
@@ -7,22 +7,25 @@
   "theme": "system",
   "defaultProvider": "openai-codex",
   "defaultModel": "gpt-6.1-sol",
-  "defaultThinkingLevel": "medium",
+  "defaultThinkingLevel": "high",
   "hideThinkingBlock": false,
   "packages": [
-    "npm:pi-web-access",
     "npm:@juicesharp/rpiv-ask-user-question",
     "../../../../data/AI/PI/@HARNESS-BUILD/packages/better-autocomplete",
     "npm:pi-zentui",
     "npm:pi-observational-memory",
     "npm:context-mode",
     "npm:pi-agent-browser-native",
-    "npm:pi-condense",
     "npm:@pi-archimedes/session-name",
     "npm:pi-tool-repair",
-    "npm:@agwab/pi-workflow",
-    "npm:pi-subagents",
-    "npm:pi-intercom"
+    "npm:@juicesharp/rpiv-pi",
+    "npm:@tintinweb/pi-subagents",
+    "npm:@juicesharp/rpiv-todo",
+    "npm:@juicesharp/rpiv-advisor",
+    "npm:@juicesharp/rpiv-i18n",
+    "npm:@juicesharp/rpiv-args",
+    "npm:@juicesharp/rpiv-workflow",
+    "npm:@juicesharp/rpiv-web-tools"
   ],
   "contextPrune": {
     "enabled": true,
@@ -44,17 +47,10 @@
     "compactAfterTokens": 260000,
     "compactAfterTokensMode": "ratio",
     "compactAfterTokensRatio": 0.92,
-    "models": {
-      "observer": {
-        "provider": "openai-codex",
-        "id": "gpt-6-luna",
-        "thinking": "xhigh"
-      },
-      "consolidator": {
-        "provider": "openai-codex",
-        "id": "gpt-6-luna",
-        "thinking": "max"
-      }
+    "model": {
+      "provider": "openai-codex",
+      "id": "gpt-6-luna",
+      "thinking": "max"
     }
   },
   "subagents": {
