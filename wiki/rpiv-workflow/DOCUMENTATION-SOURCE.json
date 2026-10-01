@@ -1,0 +1,38 @@
+{
+  "package": "@juicesharp/rpiv-workflow",
+  "version": "2.12.0",
+  "sourceDirectory": "/home/balauru/.pi/agent/npm/node_modules/@juicesharp/rpiv-workflow",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/juicesharp/rpiv-mono.git",
+    "directory": "packages/rpiv-workflow"
+  },
+  "scope": "Documentation shipped with the locally installed npm package; includes Markdown, docs, examples, skills, agents, and license files. No dependency documentation.",
+  "files": [
+    {
+      "path": "LICENSE",
+      "sha256": "25d0d5e4e54033f939a9657109044f1d71a0b6e8db9adc400456ca9190df3fb1",
+      "bytes": 1067
+    },
+    {
+      "path": "README.md",
+      "sha256": "73259519e6a7eb916e2814423e21c2284ac89876d495bfb43022b990e15326ba",
+      "bytes": 6838
+    },
+    {
+      "path": "docs/embedding.md",
+      "sha256": "3990fa4107b6fd21b561d0e5b0b8cde3338dd3be6c77454d217bddac78ef3535",
+      "bytes": 18199
+    },
+    {
+      "path": "docs/workflow-authoring.md",
+      "sha256": "a7124a076be41bcac33ee448baeb28a9836a7a8a628c5eb24494b0863bda3383",
+      "bytes": 69208
+    },
+    {
+      "path": "docs/workflow-basics.md",
+      "sha256": "b2e5ec446e76ed819a8a23b0ed7da81e9a483796e455b739bfefe4ae1e658e64",
+      "bytes": 15318
+    }
+  ]
+}

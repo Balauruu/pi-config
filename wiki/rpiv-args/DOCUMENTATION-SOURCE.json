@@ -1,0 +1,43 @@
+{
+  "package": "@juicesharp/rpiv-args",
+  "version": "2.12.0",
+  "sourceDirectory": "/home/balauru/.pi/agent/npm/node_modules/@juicesharp/rpiv-args",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/juicesharp/rpiv-mono.git",
+    "directory": "packages/rpiv-args"
+  },
+  "scope": "Documentation shipped with the locally installed npm package; includes Markdown, docs, examples, skills, agents, and license files. No dependency documentation.",
+  "files": [
+    {
+      "path": "LICENSE",
+      "sha256": "25d0d5e4e54033f939a9657109044f1d71a0b6e8db9adc400456ca9190df3fb1",
+      "bytes": 1067
+    },
+    {
+      "path": "README.md",
+      "sha256": "77733e366d50db59317306e2cd3b209090668bd27dd1ad4e079c409ef8bbc89f",
+      "bytes": 5440
+    },
+    {
+      "path": "docs/authoring-skills.md",
+      "sha256": "56a54f21d776c4e9bff2e1e345f6a587502a17f49094619d7afbe569a1159298",
+      "bytes": 3686
+    },
+    {
+      "path": "docs/how-it-works.md",
+      "sha256": "94fef4dfd6c6cde38231e5187d6af027481e49fde26ee199bfe6b086c4200cca",
+      "bytes": 4517
+    },
+    {
+      "path": "docs/placeholders.md",
+      "sha256": "637b98a27cfa55240d80bd066d10f511d555e5b13dbeeffc7ef9ce21d500922d",
+      "bytes": 3611
+    },
+    {
+      "path": "docs/shell-substitution.md",
+      "sha256": "e19fd674830aa965ebc94dd0416215f14c80c2e1d90633d3f3c273e8778aa89e",
+      "bytes": 4600
+    }
+  ]
+}

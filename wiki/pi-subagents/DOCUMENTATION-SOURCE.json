@@ -1,0 +1,82 @@
+{
+  "package": "@tintinweb/pi-subagents",
+  "version": "0.19.0",
+  "sourceDirectory": "/home/balauru/.pi/agent/npm/node_modules/@tintinweb/pi-subagents",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tintinweb/pi-subagents.git"
+  },
+  "scope": "Documentation shipped with the locally installed npm package; includes Markdown, docs, examples, skills, agents, and license files. No dependency documentation.",
+  "files": [
+    {
+      "path": "CHANGELOG.md",
+      "sha256": "480f012c7f735ada49ef1abe3827a9846b5287e7a02ca7f453036b19e4073b5a",
+      "bytes": 191970
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "sha256": "01b5a6323efd8a35d963324668d55210698a5cbfb0a7a41c4871ef5a7f13f132",
+      "bytes": 2727
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "e7d9d11c28cce34f09dc7d2b0a3a6609ccba5fbc8e926e6d1bfdf060930e9f05",
+      "bytes": 1066
+    },
+    {
+      "path": "README.md",
+      "sha256": "81c3528ba37852ac36b263db3030a8d39c60749d4d387f8c4f71b5179a409823",
+      "bytes": 104290
+    },
+    {
+      "path": "SECURITY.md",
+      "sha256": "c519cc188a33099ef3eebabfd10e8d4a9b2c2cb9a7a9f7eae259b680dceefbd7",
+      "bytes": 4977
+    },
+    {
+      "path": "docs/rpc.md",
+      "sha256": "52a312de644b6b9b0512ca53ad1679aa9edb65eda1230b9fcd40c6bbceb4eb52",
+      "bytes": 19793
+    },
+    {
+      "path": "docs/workflows.md",
+      "sha256": "2e8ddc13f964bfa24cbfbf2279b7d637c8eea9001daa9e69c1291112a73309a7",
+      "bytes": 30837
+    },
+    {
+      "path": "examples/agent-tool-description.md",
+      "sha256": "37f198380a5958bc3532b9d7d7f65cad970aa0dfd8a0d5269bc06d2d2a1bbaa3",
+      "bytes": 4563
+    },
+    {
+      "path": "examples/workflows/compose.js",
+      "sha256": "8a5c5314be77b3d0527332146678d212ec9f658dcaf74bfc89878f817d247f61",
+      "bytes": 1853
+    },
+    {
+      "path": "examples/workflows/fan-out-audit.js",
+      "sha256": "429ce61add2128dc419e5223fa0f700f7c6d547e5364fdecb28010be60baec18",
+      "bytes": 1758
+    },
+    {
+      "path": "examples/workflows/gated-fix.js",
+      "sha256": "f41afc8a68cd55969dceb75a97fd702249ecb92321c1d8d993e360a074bef941",
+      "bytes": 2664
+    },
+    {
+      "path": "examples/workflows/lib/count-child.js",
+      "sha256": "226d8c485d4929f02231fcad81dd89ae136d604e353665e854c1f1f6440b4673",
+      "bytes": 855
+    },
+    {
+      "path": "examples/workflows/review-panel.js",
+      "sha256": "b52738e9075cdb91f22f0a362ee9c789859be2749e6f6b97ff0fe3e0a8b60ca2",
+      "bytes": 2229
+    },
+    {
+      "path": "examples/workflows/structured-findings.js",
+      "sha256": "c1e704225baff86ee546d1d1f192b4ea982f0036acd57a4ce26954235b7a1ed4",
+      "bytes": 2398
+    }
+  ]
+}
